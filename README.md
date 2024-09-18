@@ -22,7 +22,7 @@ To get started, make sure you have configured your AWS provider. You can use the
 ```hcl
 
 module "iam-role" {
-  source             = "SyncArcs/iam-role/aws"
+  source             = "https://github.com/SyncArcs/terraform-aws-iam-role.git"
   version            = "1.0.0"
   name               = "iam"
   environment        = "test"
