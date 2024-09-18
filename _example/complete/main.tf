@@ -9,7 +9,7 @@ module "iam-role" {
   source             = "./../../."
   name               = "iam"
   environment        = "test"
-  managedby          =  "SyncArcs"
+  managedby          = "SyncArcs"
   assume_role_policy = data.aws_iam_policy_document.default.json
   policy_enabled     = true
   policy             = data.aws_iam_policy_document.iam-policy.json
