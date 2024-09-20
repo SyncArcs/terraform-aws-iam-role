@@ -29,17 +29,14 @@ data "aws_iam_policy_document" "default" {
   }
 }
 
-##-----------------------------------------------------------------------------
-## Data block to create IAM policy.
-##-----------------------------------------------------------------------------
 data "aws_iam_policy_document" "iam-policy" {
   statement {
     actions = [
-      "ssm:UpdateInstanceInformation",
-      "ssmmessages:CreateControlChannel",
-      "ssmmessages:CreateDataChannel",
-      "ssmmessages:OpenControlChannel",
-    "ssmmessages:OpenDataChannel"]
+      "s3:ListAllMyBuckets",
+      "s3:GetBucketLocation",
+      "s3:ListBucket",
+      "s3:GetObject"
+    ]
     effect    = "Allow"
     resources = ["*"]
   }
