@@ -1,9 +1,9 @@
 output "arn" {
-  value       = join("", aws_iam_role.test[*].arn)
+  value       = join("", aws_iam_role.default[*].arn)
   description = "Amazon Resource Name (ARN) specifying the role."
 }
 output "name" {
-  value       = join("", aws_iam_role.test[*].name)
+  value       = join("", aws_iam_role.default[*].name)
   description = "Name of the role."
 }
 output "tags" {

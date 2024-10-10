@@ -16,7 +16,7 @@ module "lables" {
 ##-----------------------------------------------------------------------------
 ## Below resource will deploy IAM role in AWS environment.
 ##----------------------------------------------------------------------------
-resource "aws_iam_role" "test" {
+resource "aws_iam_role" "default" {
   count                 = var.enabled ? 1 : 0
   name                  = module.lables.id
   assume_role_policy    = var.assume_role_policy
@@ -35,16 +35,15 @@ resource "aws_iam_role" "test" {
 resource "aws_iam_role_policy" "default" {
   count  = var.enabled && var.policy_enabled && var.policy_arn == "" ? 1 : 0
   name   = module.lables.id
-  role   = join("", aws_iam_role.test[*].id)
+  role   = join("", aws_iam_role.default[*].id)
   policy = var.policy
 }
 
 ##-----------------------------------------------------------------------------
 ## Below resource will attach IAM policy to above created IAM role.
 ##-----------------------------------------------------------------------------
-resource "aws_iam_role_policy" "default" {
-  count  = var.enabled && var.policy_enabled && var.policy_arn == "" ? 1 : 0
-  name   = module.lables.id
-  role   = join("", aws_iam_role.test[*].id)
-  policy = var.policy
+resource "aws_iam_role_policy_attachment" "default" {
+  count      = var.enabled && var.policy_enabled && var.policy_arn != "" ? 1 : 0
+  role       = join("", aws_iam_role.default[*].id)
+  policy_arn = var.policy_arn
 }
